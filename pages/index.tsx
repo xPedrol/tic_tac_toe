@@ -113,16 +113,16 @@ const Home: NextPage = () => {
     };
     return (
         <>
-            <Layout title={'tic tac toe'}>
-                {LOADED && winnerState &&
-                    <Confetti
-                        recycle={true}
-                        width={width}
-                        height={height}
-                    />
-                }
+            {LOADED && winnerState &&
+                <Confetti
+                    recycle={false}
+                    width={width}
+                    height={height}
+                />
+            }
+            <Layout title={'Tic Tac Toe'}>
                 <Flex justifyContent={'center'} alignItems={'center'} height={'100vh'} flexDirection={'column'}>
-                    <Grid templateColumns={'repeat(12,1fr)'} width={'100%'}>
+                    <Grid templateColumns={'repeat(12,1fr)'} width={'100%'} alignItems={'center'}>
                         <GridItem colSpan={{base: 12, md: 8}} textAlign={{base: 'center', md: 'left'}}>
                             <Heading
                                 size={'4xl'}
@@ -203,19 +203,19 @@ const WinnerSection = ({player, handleReset}: WinnerSectionProps) => {
     );
 };
 type ATieSectionProps = {
-    handleReset: () => void;
+    handleReset: (fullReset?:boolean) => void;
 }
 const ATieSection = ({handleReset}: ATieSectionProps) => {
     return (
         <VStack>
-            <Heading>Temos um empate</Heading>
+            <Heading>We got a Tie!</Heading>
             <Button
                 variant={'solid'}
                 colorScheme={'teal'}
                 size={'lg'}
                 leftIcon={<RepeatClockIcon/>}
-                onClick={handleReset}>
-                Reiniciar
+                onClick={()=>handleReset(false)}>
+                Try again
             </Button>
         </VStack>
     );
