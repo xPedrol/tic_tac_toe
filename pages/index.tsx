@@ -151,14 +151,14 @@ const Home: NextPage = () => {
                     </Grid>
                     <Divider my={5}/>
                     {winnerState && <WinnerSection player={player} handleReset={handleReset}/>}
-                    {winnerState === undefined && <ATieSection handleReset={handleReset}/>}
+                    {winnerState === undefined && <DrawSection handleReset={handleReset}/>}
                     <Grid templateColumns={'repeat(3, 1fr)'} templateRows={'repeat(3, 1fr)'} mt={5}>
                         {grid.map((row, i) => row.map((col, j) =>
                             <GridItem key={`${i}${j}`} borderTop={i == 1 || i == 2 ? '8px solid' : 'none'}
                                       cursor={grid[i][j] === ' ' ? 'pointer' : 'default'}
                                       borderLeft={j == 1 || j == 2 ? '8px solid' : 'none'} borderColor={borderColor}
                                       onClick={() => handleClick(i, j)}
-                                      width={'10rem'} height={'10rem'}>
+                                      width={{base:'7rem',sm:'8rem',md:'10rem'}} height={{base:'7rem',sm:'8rem',md:'10rem'}}>
                                 <Flex alignItems={'center'} justifyContent={'center'} height={'100%'}>
                                     <Heading size={'4xl'}>
                                         {grid[i][j]}
@@ -205,10 +205,10 @@ const WinnerSection = ({player, handleReset}: WinnerSectionProps) => {
 type ATieSectionProps = {
     handleReset: (fullReset?:boolean) => void;
 }
-const ATieSection = ({handleReset}: ATieSectionProps) => {
+const DrawSection = ({handleReset}: ATieSectionProps) => {
     return (
         <VStack>
-            <Heading>We got a Tie!</Heading>
+            <Heading>Draw!</Heading>
             <Button
                 variant={'solid'}
                 colorScheme={'teal'}
@@ -219,15 +219,5 @@ const ATieSection = ({handleReset}: ATieSectionProps) => {
             </Button>
         </VStack>
     );
-};
-const handleBorder = (i: number, j: number): any => {
-    let style = {};
-    if (i === 1 || i === 2) {
-        style = {...style, ...{'border-top': '3px solid'}};
-    }
-    if (j == 1 || j == 2) {
-        style = {...style, ...{'border-left': '3px solid'}};
-    }
-    return style;
 };
 export default Home;
