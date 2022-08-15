@@ -18,11 +18,14 @@ import useWindowSize from 'react-use/lib/useWindowSize';
 import Confetti from 'react-confetti';
 import {RepeatClockIcon} from "@chakra-ui/icons";
 import styles from "../styles/Home.module.css";
+
 const Home: NextPage = () => {
     const borderColor = useColorModeValue('gray.300', 'gray.700');
     const backGroundColor = useColorModeValue('black', 'white');
-    const scoreFontSize = {base:'large',md:'xx-large'};
-    const playersFontSize = {base:'xxx-small',md:'sm'};
+    const scoreFontSize = {base: 'large', md: 'xx-large'};
+    const playersFontSize = {base: 'xxx-small', md: 'sm'};
+    const gameWSize = {base: '300px', sm: '400px', md: '500px', lg: '600px'};
+    const gameHSize = {base: '300px', sm: '400px', md: '500px', lg: '600px'};
     const [LOADED, setLoaded] = useState(false);
     const [grid, setGrid] = useState<string[][]>([]);
     const [player, setPlayer] = useState<string>('X');
@@ -57,7 +60,7 @@ const Home: NextPage = () => {
         //     }
         // }
         return borderColor;
-    }
+    };
     const handleClick = (i: number, j: number) => {
         if (winnerState.length === 0) {
             const gridAux = [...grid];
@@ -76,7 +79,7 @@ const Home: NextPage = () => {
                         }
                         console.log(`Vencedor: ${gridAux[winner[0][0]][winner[0][1]]}`);
 
-                    }else{
+                    } else {
                         setDrawPoints(drawPoints + 1);
                     }
                     setWinnerState(winner);
@@ -147,41 +150,51 @@ const Home: NextPage = () => {
             <Layout title={'Tic Tac Toe'}>
                 <Flex justifyContent={'center'} alignItems={'center'} height={'100vh'} flexDirection={'column'}>
                     {/*<Divider my={5}/>*/}
-                    {winnerState.length > 0 && winnerState.some(e => e.some(e1 => e1 !== -1)) && <WinnerSection player={player} handleReset={handleReset}/>}
-                    {winnerState.length > 0 && !winnerState.some(e => e.some(e1 => e1 !== -1)) && <DrawSection handleReset={handleReset}/>}
-                    <Grid templateColumns={'repeat(3, 1fr)'} templateRows={'repeat(3, 1fr)'} mt={5}>
+                    {winnerState.length > 0 && winnerState.some(e => e.some(e1 => e1 !== -1)) &&
+                        <WinnerSection player={player} handleReset={handleReset}/>}
+                    {winnerState.length > 0 && !winnerState.some(e => e.some(e1 => e1 !== -1)) &&
+                        <DrawSection handleReset={handleReset}/>}
+                    <Grid templateColumns={'repeat(3, 1fr)'} templateRows={'repeat(3, 1fr)'} mt={5} w={gameWSize}
+                          h={gameHSize}>
                         {grid.map((row, i) => row.map((col, j) =>
-                            <GridItem key={`${i}${j}`} borderTop={i == 1 || i == 2 ? '8px solid' : 'none'}
+                            <GridItem key={`${i}${j}`} borderTop={i == 1 || i == 2 ? '6px solid' : 'none'}
                                       cursor={grid[i][j] === ' ' ? 'pointer' : 'default'}
-                                      borderLeft={j == 1 || j == 2 ? '8px solid' : 'none'} borderColor={handleBorderColor(i, j)}
+                                      borderLeft={j == 1 || j == 2 ? '6px solid' : 'none'}
+                                      borderColor={handleBorderColor(i, j)}
                                       onClick={() => handleClick(i, j)}
-                                      width={{base: '7rem', sm: '8rem',md:'10rem', lg: '13rem'}}
-                                      height={{base: '7rem', sm: '8rem',md:'10rem', lg: '13rem'}}>
-                                <Flex alignItems={'center'} justifyContent={'center'} height={'100%'}>
-                                    <Heading size={'4xl'}>
+                                      width={'100%'}
+                                      height={'100%'}>
+                                <Flex alignItems={'center'} justifyContent={'center'} w={'100%'} h={'100%'}>
+                                    <Box size={'4xl'}>
                                         {/*{grid[i][j]}*/}
                                         {grid[i][j] === 'X' && <Box
-                                            width={{base:'4rem',sm:'5rem',md:'7rem',lg:'10rem'}}
-                                            height={{base:'4rem',sm:'5rem',md:'7rem',lg:'10rem'}}
-                                            _after={{backgroundColor:backGroundColor}}
-                                            _before={{backgroundColor:backGroundColor}}
+                                            width={{base: '40px', sm: '60px', md: '100px', lg: '150px'}}
+                                            height={{base: '40px', sm: '60px', md: '100px', lg: '150px'}}
+                                            _after={{backgroundColor: backGroundColor}}
+                                            _before={{backgroundColor: backGroundColor}}
                                             className={styles.drawX}></Box>}
                                         {grid[i][j] === 'O' && <Box
-                                            width={{base:'3rem',sm:'4rem',md:'6rem',lg:'8rem'}}
-                                            height={{base:'3rem',sm:'4rem',md:'6rem',lg:'8rem'}}
+                                            width={{base: '30px', sm: '50px', md: '90px', lg: '120px'}}
+                                            height={{base: '30px', sm: '50px', md: '90px', lg: '120px'}}
                                             borderColor={backGroundColor}
                                             className={styles.drawO}></Box>}
-                                    </Heading>
+                                    </Box>
                                 </Flex>
                             </GridItem>
                         ))}
                     </Grid>
                     <GridItem colSpan={{base: 12, md: 12}} textAlign={{base: 'center', md: 'end'}}
-                              mt={{base: 5, md: 10}}>
-                        <Box display={'flex'} textAlign={'center'} justifyContent={'center'} gap={{base:10,md:20}}>
-                            <Text size={playersFontSize}>Jogador (X) <br/><Text fontWeight={'bold'} fontSize={scoreFontSize} as={'span'} color={'teal'}>{xPoints}</Text></Text>
-                            <Text size={playersFontSize}> - <br/><Text as={'span'} fontWeight={'bold'} fontSize={scoreFontSize} color={'teal'}>{drawPoints}</Text></Text>
-                            <Text size={playersFontSize}>Jogador (O) <br/><Text fontWeight={'bold'} fontSize={scoreFontSize} as={'span'} color={'teal'}>{oPoints}</Text></Text>
+                              mt={{base: 5, md: 3,lg:10}}>
+                        <Box display={'flex'} textAlign={'center'} justifyContent={'center'} gap={{base: 10, md: 20}}>
+                            <Text size={playersFontSize}>Jogador (X) <br/><Text fontWeight={'bold'}
+                                                                                fontSize={scoreFontSize} as={'span'}
+                                                                                color={'teal'}>{xPoints}</Text></Text>
+                            <Text size={playersFontSize}> - <br/><Text as={'span'} fontWeight={'bold'}
+                                                                       fontSize={scoreFontSize}
+                                                                       color={'teal'}>{drawPoints}</Text></Text>
+                            <Text size={playersFontSize}>Jogador (O) <br/><Text fontWeight={'bold'}
+                                                                                fontSize={scoreFontSize} as={'span'}
+                                                                                color={'teal'}>{oPoints}</Text></Text>
                         </Box>
                     </GridItem>
                 </Flex>
