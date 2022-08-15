@@ -13,6 +13,8 @@ const Layout = ({children, title}: PageProps) => {
         <>
             <Head>
                 <title>{title}</title>
+                <link rel="icon" type="image/png" href="/icon.png"/>
+
             </Head>
             {/*<Header/>*/}
             <Container maxW={'7xl'}>
