@@ -165,7 +165,7 @@ const Home: NextPage = () => {
                                       width={'100%'}
                                       height={'100%'}>
                                 <Flex alignItems={'center'} justifyContent={'center'} w={'100%'} h={'100%'}>
-                                    <Box size={'4xl'}>
+                                    <Heading size={'4xl'}>
                                         {/*{grid[i][j]}*/}
                                         {grid[i][j] === 'X' && <Box
                                             width={{base: '40px', sm: '60px', md: '100px', lg: '150px'}}
@@ -178,7 +178,7 @@ const Home: NextPage = () => {
                                             height={{base: '30px', sm: '50px', md: '90px', lg: '120px'}}
                                             borderColor={backGroundColor}
                                             className={styles.drawO}></Box>}
-                                    </Box>
+                                    </Heading>
                                 </Flex>
                             </GridItem>
                         ))}
