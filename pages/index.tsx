@@ -155,20 +155,20 @@ const Home: NextPage = () => {
                                       cursor={grid[i][j] === ' ' ? 'pointer' : 'default'}
                                       borderLeft={j == 1 || j == 2 ? '8px solid' : 'none'} borderColor={handleBorderColor(i, j)}
                                       onClick={() => handleClick(i, j)}
-                                      width={{base: '7rem', sm: '8rem',md:'10rem', xl: '13rem'}}
-                                      height={{base: '7rem', sm: '8rem',md:'10rem', xl: '13rem'}}>
+                                      width={{base: '7rem', sm: '8rem',md:'10rem', lg: '13rem'}}
+                                      height={{base: '7rem', sm: '8rem',md:'10rem', lg: '13rem'}}>
                                 <Flex alignItems={'center'} justifyContent={'center'} height={'100%'}>
                                     <Heading size={'4xl'}>
                                         {/*{grid[i][j]}*/}
                                         {grid[i][j] === 'X' && <Box
-                                            width={{base:'4rem',sm:'5rem',md:'7rem',xl:'10rem'}}
-                                            height={{base:'4rem',sm:'5rem',md:'7rem',xl:'10rem'}}
+                                            width={{base:'4rem',sm:'5rem',md:'7rem',lg:'10rem'}}
+                                            height={{base:'4rem',sm:'5rem',md:'7rem',lg:'10rem'}}
                                             _after={{backgroundColor:backGroundColor}}
                                             _before={{backgroundColor:backGroundColor}}
                                             className={styles.drawX}></Box>}
                                         {grid[i][j] === 'O' && <Box
-                                            width={{base:'3rem',sm:'4rem',md:'6rem',xl:'8rem'}}
-                                            height={{base:'3rem',sm:'4rem',md:'6rem',xl:'8rem'}}
+                                            width={{base:'3rem',sm:'4rem',md:'6rem',lg:'8rem'}}
+                                            height={{base:'3rem',sm:'4rem',md:'6rem',lg:'8rem'}}
                                             borderColor={backGroundColor}
                                             className={styles.drawO}></Box>}
                                     </Heading>
